@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>signup</title>
+  <link rel="icon" type="image/x-icon" href="165.ico">
+  <script>
+    function storeInfo(event) {
+      event.preventDefault();
+      // Get form values
+      var username = document.getElementById("username").value;
+      var password = document.getElementById("password").value;
+
+      // Store form values in local storage
+      localStorage.setItem("username", username);
+      localStorage.setItem("password", password);
+
+      localStorage.setItem("loggedin", false);
+        location.href = 'index.html';
+      alert("Your information has been stored!");
+    }
+  </script>
+</head>
+<body>
+  <form>
+    <label for="username">username:</label>
+    <input type="text" id="username" name="username"><br>
+    <label for="password">password:</label>
+    <input type="password" id="password" name="password"><br>
+    <input type="submit" value="Signup" onclick="storeInfo(event)">
+  </form>
+</body>
+</html>

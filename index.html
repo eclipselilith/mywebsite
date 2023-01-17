@@ -1,5 +1,7 @@
 <html>
 <head>
+  <title>home</title>
+  <link rel="icon" type="image/x-icon" href="165.ico">
   <link href="https://fonts.googleapis.com/css2?family=Impact&display=swap" rel="stylesheet">
   <style>
     /* Define the animation for the image */
@@ -41,11 +43,55 @@
 </head>
 
 <body>
+  <body onload="checkLogin()">
   <div align="center">
     <img src="unknown2.png" alt="image">
    <button onclick="location.href='maxwell.html'">surprise!!</button>
    <button onclick="location.href='quiz.html'">quiz!!</button>
    <button onclick="location.href='https://2500ji.carrd.co/'">my carrd!!</button>
   </div>
+  <div style="position: absolute; top: -30px; right: 20px;">
+    <button id="login-btn" onclick="location.href='login.html'">login</button>
+    <button id="signup-btn" onclick="location.href='signup.html'">signup</button>
+  </div>
+  <div id="welcome-div" style="position: absolute; top: 5px; right: 20px;">
+  </div>
+  <div id="signout-div" style="position: absolute; top: 5px; right: 20px;">
+    <button id="signout-btn" onclick="signout()">signout</button>
+  </div>
+  <script>
+    function checkLogin() {
+      var loggedIn = localStorage.getItem("loggedin");
+      if (loggedIn === "true") {
+        // Hide login and signup buttons
+        document.getElementById("login-btn").style.display = "none";
+        document.getElementById("signup-btn").style.display = "none";
+        // Show welcome message
+        var welcomeDiv = document.getElementById("welcome-div");
+        var username = localStorage.getItem("username");
+        welcomeDiv.innerHTML = "welcome, " + username + "!!!";
+        // Show signout button
+        document.getElementById("signout-div").style.display = "inline-block";
+      }
+      if (loggedIn === "false") {
+        document.getElementById("signout-btn").style.display = "none";
+      }
+    }
+  
+    function signout() {
+      // Remove "loggedin" item from local storage
+      localStorage.setItem("loggedin", false);
+      // Show login and signup buttons
+      document.getElementById("login-btn").style.display = "inline-block";
+      document.getElementById("signup-btn").style.display = "inline-block";
+      // Hide welcome message
+      document.getElementById("welcome-div").innerHTML = "";
+      // Hide signout button
+      document.getElementById("signout-btn").style.display = "none";
+    }
+  </script>
+
+</div>
+
 </body>
 </html>
