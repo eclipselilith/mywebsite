@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Caveat&effect=neon" rel="stylesheet">
+    <title>Quiz</title>
+    <style>
+      /* Add this CSS to center the quiz on the page */
+      form {
+        width: 20%; /* You can adjust the width to your preference */
+        margin: 0 auto;
+        font-family: 'Josefin Sans', sans-serif;
+
+      }
+
+
+      h1 {
+        text-align: center;
+        font-size: 3em;
+        font-family: 'Caveat', sans-serif;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+    </style>
+    <script>
+      function checkAnswers(event) {
+        event.preventDefault();
+        var noCount = 0;
+        var yesCount = 0;
+        var inputs = document.getElementsByTagName("input");
+        for (var i = 0; i < inputs.length; i++) {
+          if (inputs[i].value == "no" && inputs[i].checked) {
+            noCount++;
+          }
+          if (inputs[i].value == "yes" && inputs[i].checked) {
+            yesCount++;
+          }
+        }
+        if (noCount >= 3) {
+          window.location.href= "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+        } else if (yesCount >= 3) {
+          window.location.href= "passed.html";
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <h1 class="	font-effect-neon"> lilith's quiz!! </h1>
+    <form>
+      <p>1. Do you have money in your card?</p>
+      <input type="radio" name="question1" value="yes">Yes
+      <input type="radio" name="question1" value="no">No
+      
+      <p>2. Do you have a gift card with money on it?</p>
+      <input type="radio" name="question2" value="yes">Yes
+      <input type="radio" name="question2" value="no">No
+      
+      <p>3. Do you have legs?</p>
+      <input type="radio" name="question3" value="yes">Yes
+      <input type="radio" name="question3" value="no">No
+      
+      <p>4. Can you go to the nearby shop that sells gift cards, if not can you buy one online?</p>
+      <input type="radio" name="question4" value="yes">Yes
+      <input type="radio" name="question4" value="no">No
+      
+      <p>5. Did you buy it?</p>
+      <input type="radio" name="question5" value="yes">Yes
+      <input type="radio" name="question5" value="no">No
+    <button onclick="checkAnswers(event)">Submit</button>
+    </form>
+  </body>
+</html>

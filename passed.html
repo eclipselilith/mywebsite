@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    /* Define the size and position of the confetti */
+    .confetti {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background-color: #f00;
+    }
+
+    h1 {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Impact', sans-serif;
+      background-image: linear-gradient(to right, #ff0000, #ffa500, #ffff00, #00ff00, #0000ff, #4b0082, #ee82ee);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; 
+  }
+
+  </style>
+</head>
+<body>
+  <div id="confetti-container"></div>
+
+  <script>
+    // Create an array of confetti elements
+    var confetti = [];
+    for (var i = 0; i < 100; i++) {
+      confetti.push(document.createElement("div"));
+      confetti[i].classList.add("confetti");
+    }
+
+    // Add the confetti to the page
+    var container = document.getElementById("confetti-container");
+    confetti.forEach(function(el) {
+      container.appendChild(el);
+    });
+
+    // Animate the confetti
+    function animate() {
+      confetti.forEach(function(el) {
+        // Generate a random x and y position
+        var x = Math.random() * window.innerWidth;
+        var y = Math.random() * window.innerHeight;
+
+        // Set the confetti's position and append it to the page
+        el.style.left = x + "px";
+        el.style.top = y + "px";
+
+        // Generate a random size and rotation for the confetti
+        var size = Math.random() * 20 + 10;
+        var rotation = Math.random() * 360;
+        el.style.width = size + "px";
+        el.style.height = size + "px";
+        el.style.transform = "rotate(" + rotation + "deg)";
+
+        // Generate a random color for the confetti
+        var color = "rgb(" + Math.floor(Math.random() * 255) + ", " + Math.floor(Math.random() * 255) + ", " + Math.floor(Math.random() * 255) + ")";
+        el.style.backgroundColor = color;
+      });
+
+      // Repeat the animation
+      setTimeout(function(){
+        requestAnimationFrame(animate);
+      }, 100);
+    }
+
+    animate();
+  </script>
+
+  <h1>You can give lilith a Roblox gift card!! Hooray!!</h1>
+</body>
+</html>
