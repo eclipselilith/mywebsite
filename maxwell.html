@@ -1,0 +1,41 @@
+<html>
+<body>
+
+<div id="container" style="display: flex; justify-content: center; align-items: center;">
+  <button id="surprise-button" onclick="playSurprise()">Click me for a surprise</button>
+</div>
+
+<style>
+
+button {
+  display: block; /* Display the button as a block element */
+  font-size: 2em; /* Increase the font size */
+  padding: 10px 20px; /* Increase the button width */
+  height: 50px;
+  margin: 40px auto; /* Center the button horizontally and add margin to the top and bottom */
+  text-align: center;
+  background-image: linear-gradient(to right, #ff0000, #ffa500, #ffff00, #00ff00, #0000ff, #4b0082, #ee82ee);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+</style>
+
+<script>
+  function playSurprise() {
+    var gif = document.createElement("img");
+    gif.src = "maxwellcat.gif";
+    gif.style.display = "block";
+    document.getElementById("container").appendChild(gif);
+    
+    var audio = new Audio("maxwell.mp3");
+    audio.loop = true;
+    audio.play();
+
+    document.getElementById("surprise-button").style.display = "none";
+    
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<html>
+<head>
+  <style>
+    /* Define the animation for the image */
+    @keyframes rotation {
+      from {transform: rotate(0deg);}
+      to {transform: rotate(360deg);}
+    }
+    /* Apply the animation to the image */
+    img {
+      animation: rotation 4s infinite linear;
+      width: 30%; /* Change the width of the image */
+      height: auto; /* Keep the aspect ratio of the image */
+      display: block; /* Display the image as a block element */
+      margin: 0 auto; /* Center the image horizontally */
+    }
+    /* Style the button */
+    button {
+      display: block; /* Display the button as a block element */
+      font-size: 2em; /* Increase the font size */
+      padding: 10px 20px; /* Increase the button width */
+      height: 50px;
+      margin: 40px auto; /* Center the button horizontally and add margin to the top and bottom */
+      text-align: center;
+      background-image: linear-gradient(to right, #ff0000, #ffa500, #ffff00, #00ff00, #0000ff, #4b0082, #ee82ee);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    /* Hide the audio player */
+    audio {
+      display: none; /* Hide the audio player */
+    }
+
+  </style>
+</head>
+<body>
+  <div align="center">
+    <img src="mona.jpg" alt="image">
+   <button onclick="location.href='maxwell.html'">Click me!!</button>
+  </div>
+</body>
+</html>
