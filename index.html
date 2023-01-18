@@ -39,6 +39,20 @@
     audio {
       display: none; /* Hide the audio player */
     }
+
+    #signout-btn {
+      display: inline-block; /* Display the button as a inline-block element */
+      font-size: 1.5em; /* Increase the font size */
+      padding: 5px 10px; /* Increase the button width */
+      height: 50px;
+      margin: 40px auto; /* Center the button horizontally and add margin to the top and bottom */
+      text-align: center;
+      font-family: 'Impact', sans-serif;
+      background-image: linear-gradient(to right, #ff0000, #ffa500, #ffff00, #00ff00, #0000ff, #4b0082, #ee82ee);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; 
+    }
+
   </style>
 </head>
 
@@ -49,12 +63,13 @@
    <button onclick="location.href='maxwell.html'">surprise!!</button>
    <button onclick="location.href='quiz.html'">quiz!!</button>
    <button onclick="location.href='https://2500ji.carrd.co/'">my carrd!!</button>
+   <button onclick="location.href='dressup.html'">dress up!!</button>
   </div>
   <div style="position: absolute; top: -30px; right: 20px;">
     <button id="login-btn" onclick="location.href='login.html'">login</button>
     <button id="signup-btn" onclick="location.href='signup.html'">signup</button>
   </div>
-  <div id="welcome-div" style="position: absolute; top: 5px; right: 20px;">
+  <div id="welcome-div" style="position: absolute; top: 15px; right: 20px;">
   </div>
   <div id="signout-div" style="position: absolute; top: 5px; right: 20px;">
     <button id="signout-btn" onclick="signout()">signout</button>

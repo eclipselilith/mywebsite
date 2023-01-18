@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Caveat&" rel="stylesheet">
+  <link rel="shortcut icon" type="image/x-icon" href="185.png">
+  <title>dress up</title>
+  <style>
+    #person-image {
+      width: 300px;
+      height: 300px;
+      position: relative;
+    }
+    #hair-image {
+      position: absolute;
+      top: -0.5;
+      left: 38.8%;
+      width: 300px;
+      height: 300px;
+    }
+
+    #shirt-image {
+      position: absolute;
+      top: -0.5;
+      left: 38.8%;
+      width: 300px;
+      height: 300px;
+    }
+
+    #pants-image {
+      position: absolute;
+      top: -0.5;
+      left: 38.8%;
+      width: 300px;
+      height: 300px;
+    }
+
+    #accessory-image {
+      position: absolute;
+      top: -0.5;
+      left: 38.8%;
+      width: 300px;
+      height: 300px;
+    }
+    /* Styles for the arrow buttons */
+    button {
+      display: inline-block;
+      margin: 5px;
+      position: relative;
+      width: 30px;
+      height: 30px;
+    }
+    button::before, button::after {
+      content: "";
+      position: absolute;
+      top: 30%;
+      transform: translateY();
+    }
+    button.prev::before {
+      border-left: 2px solid black;
+      border-top: 2px solid black;
+      height: 10px;
+      left: 10%;
+      width: 10px;
+      transform: rotate(-45deg) 
+    }
+    button.next::after {
+      border-right: 2px solid black;
+      border-top: 2px solid black;
+      height: 10px;
+      right: 10%;
+      width: 10px;
+      transform: rotate(45deg) 
+    }
+
+    body {
+      font-family: 'Caveat', sans-serif;
+    }
+
+    #save-button {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin: 0 auto;
+      font-size: 2em; /* Increase the font size */
+      padding: 5px 40px; /* Increase the button width */
+      height: 50px;
+      text-align: center;
+      font-family: 'Impact', sans-serif;
+      background-image: linear-gradient(to right, #ff0000, #ffa500, #ffff00, #00ff00, #0000ff, #4b0082, #ee82ee);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; 
+}
+
+    #savepng-button {
+      
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin: 0 auto;
+      font-size: 2em; /* Increase the font size */
+      padding: 5px 40px; /* Increase the button width */
+      height: 50px;
+      text-align: center;
+      font-family: 'Impact', sans-serif;
+      background-image: linear-gradient(to right, #ff0000, #ffa500, #ffff00, #00ff00, #0000ff, #4b0082, #ee82ee);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; 
+}
+
+#savepng-button, #save-button {
+  margin: 5px;
+}
+</style>
+
+</head>
+<body onload="loadAvatar()">
+<body>
+  <div class='main-container' style='text-align:center;'>
+    <img id="person-image" src="littleguy/person.png" alt="person">
+    <img id="pants-image" src="" alt="pants">
+    <img id="shirt-image" src="" alt="shirt">
+    <img id="hair-image" src="" alt="hair">
+    <img id="accessory-image" src="" alt="accessory">
+</div>
+<div class='buttons-container' style='text-align:center;'>
+    <button class="prev" onclick="prevClothes('shirt')"> </button>
+    Shirts
+    <button class="next" onclick="nextClothes('shirt')"> </button>
+
+    <button class="prev" onclick="prevClothes('pants')"> </button>
+    Pants
+    <button class="next" onclick="nextClothes('pants')"> </button>
+
+    <button class="prev" onclick="prevHair()"> </button>
+    Hair
+    <button class="next" onclick="nextHair()"> </button>
+
+    <button class="prev" onclick="prevAccessory()"> </button>
+    Accessory
+    <button class="next" onclick="nextAccessory()"> </button>
+
+    <button class="prev" onclick="prevSkinTone()"> </button>
+    Skintone
+    <button class="next" onclick="nextSkinTone()"> </button>
+  </div>
+
+<div style="display:flex; justify-content: center;">
+  <button id="save-button" onclick="saveAvatar()">Save</button>
+</div>
+
+  <script>
+
+    var hairList = ["littleguy/hairs/rui_black.png", "littleguy/hairs/rui_blonde.png", "littleguy/hairs/rui_lightbrown.png", "littleguy/hairs/rui_darkbrown.png", "littleguy/hairs/rui_ginger.png", "littleguy/hairs/ponytail.png", "littleguy/hairs/ponytail_blonde.png", "littleguy/hairs/ponytail_lightbrown.png", "littleguy/hairs/ponytail_darkbrown.png", "littleguy/hairs/ponytail_ginger.png", "littleguy/hairs/wed_black.png", "littleguy/hairs/wed_blonde.png", "littleguy/hairs/wed_lightbrown.png", "littleguy/hairs/wed_darkbrown.png", "littleguy/hairs/wed_ginger.png",   "littleguy/hairs/blunt_black.png", "littleguy/hairs/blunt_blonde.png", "littleguy/hairs/blunt_lightbrown.png", "littleguy/hairs/blunt_darkbrown.png", "littleguy/hairs/blunt_ginger.png"];
+    var pantsList = ["littleguy/pants/shorts.png", "littleguy/pants/jeans.png"];
+    var shirtList = ["littleguy/shirts/tanktop.png", "littleguy/shirts/hoodie.png", "littleguy/shirts/cran.png", "littleguy/shirts/txt.png", "littleguy/shirts/corset.png", "littleguy/shirts/wednesday.png"];
+    var skinList = ["littleguy/person.png", "littleguy/person_lighter.png", "littleguy/person_middle.png", "littleguy/person_darker.png"];
+    var accessoryList = ["littleguy/accessories/frog.png", "littleguy/accessories/txt.png", "littleguy/accessories/phone.png", "littleguy/accessories/phone_1.png", "littleguy/accessories/choker.png", "littleguy/accessories/barbie.png"]
+    var currentHair = 0;
+    var currentPants = 0;
+    var currentShirt = 0;
+    var currentSkin = 0;
+    var currentAccessory = 0;
+    document.getElementById("accessory-image").src = accessoryList[currentAccessory];
+    document.getElementById("hair-image").src = hairList[currentHair];
+    document.getElementById("pants-image").src = pantsList[currentPants];
+    document.getElementById("shirt-image").src = shirtList[currentShirt];
+    document.getElementById("person-image").src = skinList[currentSkin];
+    
+
+    function saveAvatar() {
+    var loggedIn = localStorage.getItem("loggedin");
+    if (loggedIn === "true") {
+      var currentAvatar = {
+        hair: hairList[currentHair],
+        pants: pantsList[currentPants],
+        shirt: shirtList[currentShirt],
+        skin: skinList[currentSkin],
+        accessory: accessoryList[currentAccessory]
+    }
+    localStorage.setItem("currentAvatar", JSON.stringify(currentAvatar));
+    alert("Avatar saved to Local Storage!");
+    } else {
+      alert("Please log in to save your avatar!")
+    }
+  }
+
+  function saveAsPNG() {
+    var avatar = document.getElementsByClassName("main-container")[0];
+
+    html2canvas(avatar, {logging: true}).then(function(canvas) {
+        var link = document.createElement("a");
+        link.download = "avatar.png";
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+    });
+}
+
+  function loadAvatar() {
+    var loggedIn = localStorage.getItem("loggedin");
+    var savedAvatar = JSON.parse(localStorage.getItem("currentAvatar"));
+    if (loggedIn === "true") {
+      if (savedAvatar) {
+        currentHair = hairList.indexOf(savedAvatar.hair);
+        currentPants = pantsList.indexOf(savedAvatar.pants);
+        currentShirt = shirtList.indexOf(savedAvatar.shirt);
+        currentSkin = skinList.indexOf(savedAvatar.skin);
+        currentAccessory = accessoryList.indexOf(savedAvatar.accessory);
+        document.getElementById("accessory-image").src = accessoryList[currentAccessory];
+        document.getElementById("hair-image").src = hairList[currentHair];
+        document.getElementById("pants-image").src = pantsList[currentPants];
+        document.getElementById("shirt-image").src = shirtList[currentShirt];
+        document.getElementById("person-image").src = skinList[currentSkin];
+    } else {
+    currentHair = 0;
+    currentPants = 0;
+    currentShirt = 0;
+    currentSkin = 0;
+    currentAccessory = 0;
+    document.getElementById("accessory-image").src = accessoryList[currentAccessory];
+    document.getElementById("hair-image").src = hairList[currentHair];
+    document.getElementById("pants-image").src = pantsList[currentPants];
+    document.getElementById("shirt-image").src = shirtList[currentShirt];
+    document.getElementById("person-image").src = skinList[currentSkin];
+    }
+}
+  }
+
+    function prevClothes(type) {
+  if(type == "shirt") {
+    currentShirt--;
+    if (currentShirt < 0) {
+      currentShirt = shirtList.length - 1;
+    }
+    document.getElementById("shirt-image").src = shirtList[currentShirt];
+  } else {
+    currentPants--;
+    if (currentPants < 0) {
+      currentPants = pantsList.length - 1;
+    }
+    document.getElementById("pants-image").src = pantsList[currentPants];
+  }
+}
+
+function nextClothes(type) {
+  if(type == "shirt") {
+    currentShirt++;
+    if (currentShirt >= shirtList.length) {
+      currentShirt = 0;
+    }
+    document.getElementById("shirt-image").src = shirtList[currentShirt];
+  } else {
+    currentPants++;
+    if (currentPants >= pantsList.length) {
+      currentPants = 0;
+    }
+    document.getElementById("pants-image").src = pantsList[currentPants];
+  }
+}
+
+
+  function prevAccessory() {
+    currentAccessory--;
+    if (currentAccessory < 0) {
+      currentAccessory = accessoryList.length - 1;
+    }
+    document.getElementById("accessory-image").src = accessoryList[currentAccessory];
+}
+
+function nextAccessory() {
+  currentAccessory++;
+    if (currentAccessory >= accessoryList.length) {
+      currentAccessory = 0;
+    }
+    document.getElementById("accessory-image").src = accessoryList[currentAccessory];
+}
+
+
+  function prevHair() {
+    currentHair--;
+    if (currentHair < 0) {
+        currentHair = hairList.length - 1;
+    }
+    document.getElementById("hair-image").src = hairList[currentHair];
+}
+
+function nextHair() {
+    currentHair++;
+    if (currentHair >= hairList.length) {
+        currentHair = 0;
+    }
+    document.getElementById("hair-image").src = hairList[currentHair];
+}
+
+function prevSkinTone() {
+    currentSkin--;
+    if (currentSkin < 0) {
+        currentSkin = skinList.length - 1;
+    }
+    document.getElementById("person-image").src = skinList[currentSkin];
+}
+
+function nextSkinTone() {
+    currentSkin++;
+    if (currentSkin >= skinList.length) {
+        currentSkin = 0;
+    }
+    document.getElementById("person-image").src = skinList[currentSkin];
+}
+
+  </script>
+</body>
+</html>
