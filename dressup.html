@@ -2,9 +2,29 @@
 <html>
 <head>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+
   <link href="https://fonts.googleapis.com/css?family=Caveat&" rel="stylesheet">
+
   <link rel="shortcut icon" type="image/x-icon" href="185.png">
+
   <title>dress up</title>
+
+  <script>
+ function checkHair() {
+  if (document.getElementById("hair-image").src.includes("miku_original")) {
+    document.getElementById("backhair-image").src = 'littleguy/backhairs/miku_original.png';
+    currentBackHair = 1;
+  } else if (document.getElementById("hair-image").src.includes("miku_black")) {
+    document.getElementById("backhair-image").src = 'littleguy/backhairs/miku_black.png';
+    currentBackHair = 2;
+  }
+  else {
+    document.getElementById("backhair-image").src = 'littleguy/pants/empty.png';
+    currentBackHair = 0;
+  }
+}
+  </script>
+
   <style>
     #person-image {
       width: 300px;
@@ -42,6 +62,70 @@
       width: 300px;
       height: 300px;
     }
+
+    .face-container {
+  position: relative;
+}
+
+#face-image {
+  width: 300px;
+      height: 300px;
+      position: absolute;
+      top: 50%;
+  left: 50%;
+  transform: translate(-50%,-101%);
+}
+
+    #backhair-image {
+      position: absolute;
+      top: -0.5;
+      left: 38.8%;
+      width: 300px;
+      height: 300px;
+    }
+
+    @media (max-width: 480px) {
+  #hair-image {
+    position: absolute;
+    top: 24.1%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  #shirt-image {
+    position: absolute;
+    top: 24.1%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  #pants-image {
+    position: absolute;
+    top: 24.1%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+  }
+  #accessory-image {
+    position: absolute;
+    top: 24.1%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  #backhair-image {
+    position: absolute;
+    top: 24.1%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+  }
+    #face-image {
+    position: absolute;
+    top: 24.1%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+  }
+}
+
     /* Styles for the arrow buttons */
     button {
       display: inline-block;
@@ -115,14 +199,21 @@
 
 </head>
 <body onload="loadAvatar()">
+
 <body>
   <div class='main-container' style='text-align:center;'>
+    <img id="backhair-image" src="" alt="backhair">
     <img id="person-image" src="littleguy/person.png" alt="person">
     <img id="pants-image" src="" alt="pants">
     <img id="shirt-image" src="" alt="shirt">
     <img id="hair-image" src="" alt="hair">
     <img id="accessory-image" src="" alt="accessory">
 </div>
+
+<div class="face-container">
+  <img id="face-image" src="littleguy/face_1.png">
+</div>
+
 <div class='buttons-container' style='text-align:center;'>
     <button class="prev" onclick="prevClothes('shirt')"> </button>
     Shirts
@@ -132,9 +223,9 @@
     Pants
     <button class="next" onclick="nextClothes('pants')"> </button>
 
-    <button class="prev" onclick="prevHair()"> </button>
+    <button class="prev" onclick="prevHair(), checkHair()" > </button>
     Hair
-    <button class="next" onclick="nextHair()"> </button>
+    <button class="next" onclick="nextHair(), checkHair()" > </button>
 
     <button class="prev" onclick="prevAccessory()"> </button>
     Accessory
@@ -150,18 +241,20 @@
 </div>
 
   <script>
-
-    var hairList = ["littleguy/hairs/rui_black.png", "littleguy/hairs/rui_blonde.png", "littleguy/hairs/rui_lightbrown.png", "littleguy/hairs/rui_darkbrown.png", "littleguy/hairs/rui_ginger.png", "littleguy/hairs/ponytail.png", "littleguy/hairs/ponytail_blonde.png", "littleguy/hairs/ponytail_lightbrown.png", "littleguy/hairs/ponytail_darkbrown.png", "littleguy/hairs/ponytail_ginger.png", "littleguy/hairs/wed_black.png", "littleguy/hairs/wed_blonde.png", "littleguy/hairs/wed_lightbrown.png", "littleguy/hairs/wed_darkbrown.png", "littleguy/hairs/wed_ginger.png",   "littleguy/hairs/blunt_black.png", "littleguy/hairs/blunt_blonde.png", "littleguy/hairs/blunt_lightbrown.png", "littleguy/hairs/blunt_darkbrown.png", "littleguy/hairs/blunt_ginger.png"];
-    var pantsList = ["littleguy/pants/shorts.png", "littleguy/pants/jeans.png"];
-    var shirtList = ["littleguy/shirts/tanktop.png", "littleguy/shirts/hoodie.png", "littleguy/shirts/cran.png", "littleguy/shirts/txt.png", "littleguy/shirts/corset.png", "littleguy/shirts/wednesday.png"];
-    var skinList = ["littleguy/person.png", "littleguy/person_lighter.png", "littleguy/person_middle.png", "littleguy/person_darker.png"];
-    var accessoryList = ["littleguy/accessories/frog.png", "littleguy/accessories/txt.png", "littleguy/accessories/phone.png", "littleguy/accessories/phone_1.png", "littleguy/accessories/choker.png", "littleguy/accessories/barbie.png"]
+    var backHairList = ["littleguy/pants/empty.png", "littleguy/backhairs/miku_original.png", "littleguy/backhairs/miku_black.png"];
+    var hairList = ["littleguy/hairs/rui_black.png", "littleguy/hairs/rui_blonde.png", "littleguy/hairs/rui_lightbrown.png", "littleguy/hairs/rui_darkbrown.png", "littleguy/hairs/rui_ginger.png", "littleguy/hairs/ponytail.png", "littleguy/hairs/ponytail_blonde.png", "littleguy/hairs/ponytail_lightbrown.png", "littleguy/hairs/ponytail_darkbrown.png", "littleguy/hairs/ponytail_ginger.png", "littleguy/hairs/wed_black.png", "littleguy/hairs/wed_blonde.png", "littleguy/hairs/wed_lightbrown.png", "littleguy/hairs/wed_darkbrown.png", "littleguy/hairs/wed_ginger.png", "littleguy/hairs/blunt_black.png", "littleguy/hairs/blunt_blonde.png", "littleguy/hairs/blunt_lightbrown.png", "littleguy/hairs/blunt_darkbrown.png", "littleguy/hairs/blunt_ginger.png", "littleguy/hairs/mullet_black.png", "littleguy/hairs/mullet_blonde.png", "littleguy/hairs/mullet_lightbrown.png", "littleguy/hairs/mullet_darkbrown.png", "littleguy/hairs/mullet_ginger.png", "littleguy/hairs/miku_original.png", "littleguy/hairs/miku_black.png"];
+    var pantsList = ["littleguy/pants/shorts.png", "littleguy/pants/jeans.png", "littleguy/pants/skirt.png", "littleguy/pants/skirt_1.png", "littleguy/pants/skirtlong.png", "littleguy/pants/bodysuit.png", "littleguy/pants/jeans_1.png", "littleguy/pants/empty.png"];
+    var shirtList = ["littleguy/shirts/tanktop.png", "littleguy/shirts/hoodie.png", "littleguy/shirts/cran.png", "littleguy/shirts/txt.png", "littleguy/shirts/corset.png", "littleguy/shirts/wednesday.png", "littleguy/shirts/puffy.png", "littleguy/shirts/revenge.png", "littleguy/shirts/revenge_1.png"];
+    var skinList = ["littleguy/person_1.png", "littleguy/person_2.png", "littleguy/person_3.png", "littleguy/person_4.png", "littleguy/person_5.png", "littleguy/person_6.png"];
+    var accessoryList = ["littleguy/pants/empty.png", "littleguy/accessories/frog.png", "littleguy/accessories/txt.png", "littleguy/accessories/phone.png", "littleguy/accessories/phone_1.png", "littleguy/accessories/choker.png", "littleguy/accessories/barbie.png"]
+    var currentBackHair = 0;
     var currentHair = 0;
     var currentPants = 0;
     var currentShirt = 0;
     var currentSkin = 0;
     var currentAccessory = 0;
     document.getElementById("accessory-image").src = accessoryList[currentAccessory];
+    document.getElementById("backhair-image").src = backHairList[currentBackHair];
     document.getElementById("hair-image").src = hairList[currentHair];
     document.getElementById("pants-image").src = pantsList[currentPants];
     document.getElementById("shirt-image").src = shirtList[currentShirt];
@@ -176,7 +269,8 @@
         pants: pantsList[currentPants],
         shirt: shirtList[currentShirt],
         skin: skinList[currentSkin],
-        accessory: accessoryList[currentAccessory]
+        accessory: accessoryList[currentAccessory],
+        backhair: backHairList[currentBackHair]
     }
     localStorage.setItem("currentAvatar", JSON.stringify(currentAvatar));
     alert("Avatar saved to Local Storage!");
@@ -196,6 +290,7 @@
     });
 }
 
+
   function loadAvatar() {
     var loggedIn = localStorage.getItem("loggedin");
     var savedAvatar = JSON.parse(localStorage.getItem("currentAvatar"));
@@ -205,26 +300,31 @@
         currentPants = pantsList.indexOf(savedAvatar.pants);
         currentShirt = shirtList.indexOf(savedAvatar.shirt);
         currentSkin = skinList.indexOf(savedAvatar.skin);
+        currentBackHair = backHairList.indexOf(savedAvatar.backhair);
         currentAccessory = accessoryList.indexOf(savedAvatar.accessory);
         document.getElementById("accessory-image").src = accessoryList[currentAccessory];
         document.getElementById("hair-image").src = hairList[currentHair];
+        document.getElementById("backhair-image").src = backHairList[currentBackHair];
         document.getElementById("pants-image").src = pantsList[currentPants];
         document.getElementById("shirt-image").src = shirtList[currentShirt];
         document.getElementById("person-image").src = skinList[currentSkin];
+}
+   
     } else {
     currentHair = 0;
     currentPants = 0;
     currentShirt = 0;
     currentSkin = 0;
     currentAccessory = 0;
+    currentBackHair = 0;
     document.getElementById("accessory-image").src = accessoryList[currentAccessory];
     document.getElementById("hair-image").src = hairList[currentHair];
+    document.getElementById("backhair-image").src = backHairList[currentBackHair];
     document.getElementById("pants-image").src = pantsList[currentPants];
     document.getElementById("shirt-image").src = shirtList[currentShirt];
     document.getElementById("person-image").src = skinList[currentSkin];
     }
 }
-  }
 
     function prevClothes(type) {
   if(type == "shirt") {
@@ -275,14 +375,13 @@ function nextAccessory() {
     document.getElementById("accessory-image").src = accessoryList[currentAccessory];
 }
 
-
   function prevHair() {
     currentHair--;
     if (currentHair < 0) {
         currentHair = hairList.length - 1;
     }
     document.getElementById("hair-image").src = hairList[currentHair];
-}
+} 
 
 function nextHair() {
     currentHair++;
@@ -309,5 +408,31 @@ function nextSkinTone() {
 }
 
   </script>
+
+  
+<script>
+  let currentFace = 1;
+  setInterval(function() {
+    let randomNum = Math.random();
+    if (randomNum > 0.7) {
+      if (currentFace === 1) {
+        document.getElementById("face-image").src = "littleguy/face_2.png";
+        currentFace = 2;
+        setTimeout(function(){
+          document.getElementById("face-image").src = "littleguy/face_1.png";
+          currentFace = 1;
+        },200);
+      } else {
+        document.getElementById("face-image").src = "littleguy/face_1.png";
+        currentFace = 1;
+        setTimeout(function(){
+          document.getElementById("face-image").src = "littleguy/face_2.png";
+          currentFace = 2;
+        },200);
+      }
+    }
+  }, Math.random()*(1000-300) + 300);
+  </script>
+
 </body>
 </html>
